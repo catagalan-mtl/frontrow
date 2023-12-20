@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  #hello
   before_action :authenticate_user!
 
   def default_url_options
