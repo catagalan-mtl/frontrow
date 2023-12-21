@@ -46,27 +46,27 @@ bands = [{ name: 'The Menzingers', url: '3071d829-b9ca-4499-b4f5-74d6d8531aed',
   photo_url: "https://media.pitchfork.com/photos/6151d4465f20b295d9d2c2a0/2:1/w_2560%2Cc_limit/Tool.jpg" }]
 
 bands.each do |band|
-sleep(3)
-puts "Creating the artist #{band[:name]}"
-artist = Artist.create(name: "#{band[:name]}")
-photo = URI.open(band[:photo_url])
-artist.photo.attach(io: photo, filename: "band_photo.png", content_type: "image/png")
-puts "Creating concerts for #{band[:name]}"
+  sleep(3)
+  puts "Creating the artist #{band[:name]}"
+  artist = Artist.create(name: "#{band[:name]}")
+  photo = URI.open(band[:photo_url])
+  artist.photo.attach(io: photo, filename: "band_photo.png", content_type: "image/png")
+  puts "Creating concerts for #{band[:name]}"
 
-url = "https://api.setlist.fm/rest/1.0/artist/#{band[:url]}/setlists"
+  url = "https://api.setlist.fm/rest/1.0/artist/#{band[:url]}/setlists"
 
-response = RestClient.get(url, { 'Accept': 'application/json', 'x-api-key': ENV['SETLIST_API_KEY'] })
-shows = JSON.parse(response)
+  response = RestClient.get(url, { 'Accept': 'application/json', 'x-api-key': ENV['SETLIST_API_KEY'] })
+  shows = JSON.parse(response)
 
-shows["setlist"].each do |show|
-concert = Concert.new
-concert.city = show["venue"]["city"]["name"]
-concert.venue = show["venue"]["name"]
-concert.date = show["eventDate"]
-concert.artist_id = artist.id
-concert.save!
-puts "Created new concert with id #{concert.id} for #{band[:name]}"
-end
+  shows["setlist"].each do |show|
+    concert = Concert.new
+    concert.city = show["venue"]["city"]["name"]
+    concert.venue = show["venue"]["name"]
+    concert.date = show["eventDate"]
+    concert.artist_id = artist.id
+    concert.save!
+    puts "Created new concert with id #{concert.id} for #{band[:name]}"
+  end
 end
 
 
