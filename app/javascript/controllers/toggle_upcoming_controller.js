@@ -15,16 +15,29 @@ export default class extends Controller {
     })
   }
 
+  // hide() {
+  //   this.cardTargets.forEach((card) => {
+  //     const date = new Date(card.dataset.date);
+  //       if (date <= new Date()) {
+  //         card.classList.toggle("hide")
+  //         card.parentElement.classList.toggle("hide")
+  //       } else {
+  //         card.classList.toggle("hide")
+  //         card.parentElement.classList.toggle("hide")
+  //       }
+  //   })
+  // }
+
   hide() {
     this.cardTargets.forEach((card) => {
       const date = new Date(card.dataset.date);
-        if (date <= new Date()) {
-          card.classList.toggle("hide")
-          card.parentElement.classList.toggle("hide")
-        } else {
-          card.classList.toggle("hide")
-          card.parentElement.classList.toggle("hide")
-        }
+      if (date < new Date()) {
+        card.classList.add("hide");
+        card.parentElement.classList.add("hide");
+      } else {
+        card.classList.remove("hide");
+        card.parentElement.classList.remove("hide");
+      }
     })
   }
 }
