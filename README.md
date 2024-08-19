@@ -4,7 +4,7 @@
 
 Frontrow is a social platform where fans can log concerts they've seen by rating and reviewing their experience, and follow other fans, and interact with them.
 
-[(https://frontrow1208.herokuapp.com/)]
+https://frontrow1208.herokuapp.com/
 
 ![Frontrow landing page](/app/assets/images/Frontrow_landing.png?raw=true)
 
